@@ -1,3 +1,9 @@
 <h1>Articles#index</h1>
 <p>Find me in app/views/articles/index.html.erb</p>
-<p>Hola, me llamo magomaticas 👊<p>
+<p>Hola, me llamo magomaticas 👊<p><% @articles %>
+<ul>
+    <% @articles.each do |article| %>
+        <li>Titulo: <%= article.title %> </li>
+        <li><%= article.body %> </li>
+    <% end %>
+</ul>
