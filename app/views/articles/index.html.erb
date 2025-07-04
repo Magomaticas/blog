@@ -3,7 +3,6 @@
 <p>Hola, me llamo magomaticas 👊<p><% @articles %>
 <ul>
     <% @articles.each do |article| %>
-        <li>Titulo: <%= article.title %> </li>
-        <li><%= article.body %> </li>
+        <li> <%= link_to article.title, article %> </li>
     <% end %>
 </ul>
