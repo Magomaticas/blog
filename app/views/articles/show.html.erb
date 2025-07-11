@@ -1,5 +1,6 @@
-<h1> <%= @article.title %> </h1>
-<p> <%= @article.body %> </p>
+<h1><%= @article.title %></h1>
+
+<p><%= @article.body %></p>
 
 <ul>
   <li><%= link_to "Editar", edit_article_path(@article) %></li>
@@ -8,3 +9,9 @@
                     turbo_confirm: "¿Estás seguro?"
                   } %></li>
 </ul>
+
+<h2>Comentarios </h2>
+<%= render @article.comments %>
+
+<h2>Agregar un comentario:</h2>
+<%= render "comments/form", article: @article %>
