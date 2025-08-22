@@ -22,15 +22,54 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+<body>
     <nav class="w-full bg-white border-b shadow-sm mb-4">
       <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
-        <div class="flex items-center gap-6">
-          <%= link_to root_path, class: "flex items-center gap-2 text-gray-700 hover:text-blue-600 font-semibold transition" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-9 2v6m0 0v6m0-6h6m-6 0H5m6 0h6" />
-            </svg>
-            Home
+        <!-- Logo/Brand --> 
+        <div class="flex items-center gap-2">
+        <%= icon_upload %>
+
+          <%= link_to "Home", root_path, class: "text-gray-700 font-semibold hover:text-blue-600 transition" %>
+        </div>
+
+        <!-- Navegación condicional basada en autenticación -->
+        <div class="flex items-center gap-4">
+          <% if user_signed_in? %>
+            <!-- Usuario autenticado -->
+            <div class="flex items-center gap-4">
+                <span class="text-gray-700">
+                Hola, <%= user_display_name(current_user) %>
+              </span>
+              
+              <%= link_to profile_path, class: "flex items-center gap-2 text-gray-700 hover:text-blue-600 transition" do %>
+                <%= icon_profile %>
+                Perfil
+              <% end %>
+              
+              <%= button_to destroy_user_session_path, method: :delete, class: "flex items-center gap-2 text-red-600 hover:text-red-700 transition", form: { class: "inline" } do %>
+                <%= icon_logout %>
+                Salir
+              <% end %>
+
+              
+              <%= button_to destroy_user_session_path, method: :delete, class: "flex items-center gap-2 text-red-600 hover:text-red-700 transition", form: { class: "inline" } do %>
+                <%= icon_logout %>
+                Salir
+              <% end %>
+            </div>
+          <% else %>
+            <!-- Usuario no autenticado -->
+            <div class="flex items-center gap-3">
+              <%= link_to new_user_session_path, class: "flex items-center gap-2 px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition" do %>
+                Iniciar sesión
+                <%= icon_user %>
+              <% end %>
+              
+              <%= link_to new_user_registration_path, class: "flex items-center gap-2 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition" do %>
+                <%= icon_user_add %>
+                Registrarse
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>

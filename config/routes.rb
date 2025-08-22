@@ -6,6 +6,13 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+
+  # Ruta para el perfil del usuario
+  get "profile", to: "users#profile", as: :profile
+
+  #ruta para enviar un email de prueba
+  get "test/send_test_email", to: "test_mailer#send_test_email", as: :send_test_email
+
   #De esta manera los articulos están anidados a los comentarios 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

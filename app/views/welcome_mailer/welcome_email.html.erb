@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <div style="max-width: 600px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif;">
+    <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center;">
+      <h1 style="color: #2563eb; margin-bottom: 20px;">¡Bienvenido a Blor!</h1>
+      
+      <p style="font-size: 16px; color: #374151; margin-bottom: 20px;">
+        Hola <strong><%= @user.email.split('@').first.capitalize %></strong>,
+      </p>
+      
+      <p style="font-size: 16px; color: #374151; margin-bottom: 30px;">
+        Gracias por registrarte en nuestra plataforma. Estamos emocionados de tenerte como parte de nuestra comunidad.
+      </p>
+      
+      <div style="background-color: white; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+        <h2 style="color: #1f2937; margin-bottom: 15px;">¿Qué puedes hacer ahora?</h2>
+        <ul style="text-align: left; color: #374151;">
+          <li>Explorar artículos y contenido</li>
+          <li>Comentar en las publicaciones</li>
+          <li>Personalizar tu perfil</li>
+          <li>Conectar con otros usuarios</li>
+        </ul>
+      </div>
+      
+      <a href="<%= @url %>" style="display: inline-block; background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+        Comenzar a explorar
+      </a>
+      
+      <p style="font-size: 14px; color: #6b7280; margin-top: 30px;">
+        Si tienes alguna pregunta, no dudes en contactarnos.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
