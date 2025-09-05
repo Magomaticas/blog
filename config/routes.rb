@@ -26,4 +26,8 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   # Defines the root path route ("/")
   # root "posts#index"
+
+  # puede sere debajo de get "test/send_test_email"
+  get "test/notifications", to: "test_mailer#test_notifications", as: :test_notifications
+  get "test/notification/:type", to: "test_mailer#test_single_notification", as: :test_single_notification
 end

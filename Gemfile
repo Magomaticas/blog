@@ -65,5 +65,3 @@ end
 gem "tailwindcss-rails", "~> 4.3"
 
 gem "devise", "~> 4.9"
-
-gem "mailcatcher", "~> 0.2.4"

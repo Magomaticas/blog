@@ -51,11 +51,6 @@
                 Salir
               <% end %>
 
-              
-              <%= button_to destroy_user_session_path, method: :delete, class: "flex items-center gap-2 text-red-600 hover:text-red-700 transition", form: { class: "inline" } do %>
-                <%= icon_logout %>
-                Salir
-              <% end %>
             </div>
           <% else %>
             <!-- Usuario no autenticado -->
@@ -74,6 +69,9 @@
         </div>
       </div>
     </nav>
+
+    <%= render_flash_messages %>
+
     <main class="mx-auto mt-28 px-5">
       <%= yield %>
     </main>
