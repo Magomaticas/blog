@@ -1,19 +1,22 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show] # no necesitamos autenticar al usuario para listar y mostrar artículos
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_article, only: [:show, :edit, :update, :destroy]
 
   def index
-    @articles = Article.all
+    @articles = policy_scope(Article)
   end
 
   def show
   end
 
   def new
+    authorize Article
     @article = current_user.articles.build
   end
 
   def create
+    authorize Article
     @article = current_user.articles.build(article_params)
     if @article.save
       redirect_to @article, notice: "¡Artículo creado exitosamente!"
@@ -47,6 +50,10 @@ class ArticlesController < ApplicationController
 
     def set_article
       @article = Article.find(params[:id])
+    end
+
+    def authorize_article
+      authorize @article
     end
 
     def article_params

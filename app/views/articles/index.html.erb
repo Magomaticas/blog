@@ -1,11 +1,11 @@
 <div class="max-w-6xl mx-auto mt-10 px-8">
   <div class="flex items-center justify-between mb-10">
     <h1 class="text-3xl font-bold text-gray-900">Artículos</h1>
-    <%= link_to new_article_path, class: "flex items-center gap-2 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded font-semibold transition" do %>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-      </svg>
-      Nuevo Artículo
+    <% if policy(Article).new? %>
+      <%= link_to new_article_path, class: "flex items-center gap-2 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded font-semibold transition" do %>
+        <%= icon_plus %>
+        Nuevo Artículo
+      <% end %>
     <% end %>
   </div>
   <div class="space-y-8">
@@ -13,16 +13,23 @@
       <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-8 flex items-center justify-between">
         <div class="flex items-center gap-4">
           <span class="text-gray-400 text-base">#<%= article.id %></span>
-          <%= link_to article.title, article, class: "text-2xl font-bold text-blue-700 hover:underline" %>
+          <div class="flex flex-col gap-1">
+            <%= link_to article.title, article, class: "text-2xl font-bold text-blue-700 hover:underline" %>
+            <%= publication_state_badge(article) %>
+          </div>
         </div>
         <div class="flex gap-4 items-center">
-          <%= link_to edit_article_path(article), class: "flex flex-row items-center space-x-2 px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full font-medium transition" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-2.828 0L9 13zm0 0V21h8" /></svg>
-            <span>Editar</span>
+          <% if policy(article).update? %>
+            <%= link_to edit_article_path(article), class: "flex flex-row items-center space-x-2 px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full font-medium transition" do %>
+              <%= icon_edit %>
+              <span>Editar</span>
+            <% end %>
           <% end %>
-          <%= link_to article_path(article), data: { turbo_method: :delete, turbo_confirm: "¿Seguro que quieres eliminar este artículo?" }, class: "flex flex-row items-center space-x-2 px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-full font-medium transition" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-            <span>Eliminar</span>
+          <% if policy(article).destroy? %>
+            <%= link_to article_path(article), data: { turbo_method: :delete, turbo_confirm: "¿Seguro que quieres eliminar este artículo?" }, class: "flex flex-row items-center space-x-2 px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-full font-medium transition" do %>
+              <%= icon_delete %>
+              <span>Eliminar</span>
+            <% end %>
           <% end %>
         </div>
       </div>

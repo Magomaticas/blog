@@ -1,7 +1,26 @@
 module ApplicationHelper
   # Extrae el nombre del usuario del email (parte antes del @)
   def user_display_name(user)
+    return "Usuario anónimo" if user.nil?
     user.email.split("@").first.capitalize
+  end
+
+  def icon_plus
+    content_tag :svg, xmlns: "http://www.w3.org/2000/svg", class: "h-5 w-5", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor" do
+      content_tag :path, nil, stroke_linecap: "round", stroke_linejoin: "round", stroke_width: "2", d: "M12 4v16m8-8H4"
+    end
+  end
+
+  def icon_edit
+    content_tag :svg, xmlns: "http://www.w3.org/2000/svg", class: "h-4 w-4", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor" do
+      content_tag :path, nil, stroke_linecap: "round", stroke_linejoin: "round", stroke_width: "2", d: "M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-2.828 0L9 13zm0 0V21h8"
+    end
+  end
+
+  def icon_delete
+    content_tag :svg, xmlns: "http://www.w3.org/2000/svg", class: "h-4 w-4", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor" do
+      content_tag :path, nil, stroke_linecap: "round", stroke_linejoin: "round", stroke_width: "2", d: "M6 18L18 6M6 6l12 12"
+    end
   end
 
     # Helpers para iconos SVG

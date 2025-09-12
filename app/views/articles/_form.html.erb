@@ -1,24 +1,32 @@
-<%= form_with model: article do |form| %>
-  <div class="mb-6">
-    <%= form.label :title, class: "block text-gray-700 font-semibold mb-2" %>
-    <%= form.text_field :title, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
-    <% article.errors.full_messages_for(:title).each do |message| %>
-      <div class="text-red-500 text-sm mt-1"> <%= message %> </div>
-    <% end %>
-  </div>
-  <div class="mb-6">
-    <%= form.label :body, class: "block text-gray-700 font-semibold mb-2" %>
-    <%= form.rich_textarea :body, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 min-h-[120px]" %>
-    <% article.errors.full_messages_for(:body).each do |message| %>
-      <div class="text-red-500 text-sm mt-1"> <%= message %> </div>
-    <% end %>
-  </div>
-  <div>
-    <button type="submit" class="flex items-center gap-2 px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded font-semibold transition">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-2.828 0L9 13zm0 0V21h8" />
-      </svg>
-      <span><%= article.persisted? ? 'Actualizar artículo' : 'Crear artículo' %></span>
-    </button>
+<% if user_signed_in? %>
+  <%= form_with model: [ article, article.comments.build ] do |form| %>
+    <div class="mb-4">
+      <div class="flex items-center gap-2 mb-2">
+        <%= icon_user %>
+        <span class="text-sm text-gray-600">Comentando como: <strong><%= user_display_name(current_user) %></strong></span>
+      </div>
+    </div>
+    <div class="mb-4">
+      <%= form.label :body, "Tu comentario", class: "block text-gray-700 font-semibold mb-2" %>
+      <%= form.text_area :body, placeholder: "Escribe tu comentario aquí...", class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 min-h-[80px]" %>
+    </div>
+    <div>
+      <button type="submit" class="flex flex-row items-center space-x-2 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded font-semibold transition">
+        <%= icon_plus %>
+        <span>Publicar comentario</span>
+      </button>
+    </div>
+  <% end %>
+<% else %>
+  <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+    <div class="flex items-center justify-center gap-2 mb-3">
+      <%= icon_user %>
+      <h3 class="text-lg font-semibold text-gray-700">Inicia sesión para comentar</h3>
+    </div>
+    <p class="text-gray-600 mb-4">Necesitas estar autenticado para poder agregar comentarios a este artículo.</p>
+    <div class="flex gap-3 justify-center">
+      <%= link_to "Iniciar sesión", new_user_session_path, class: "flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded font-medium transition" %>
+      <%= link_to "Registrarse", new_user_registration_path, class: "flex items-center gap-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded font-medium transition" %>
+    </div>
   </div>
 <% end %>
