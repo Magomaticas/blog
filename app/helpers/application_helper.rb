@@ -71,6 +71,18 @@ module ApplicationHelper
     end
   end
 
+    def icon_calendar
+    content_tag :svg, xmlns: "http://www.w3.org/2000/svg", class: "h-4 w-4", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor" do
+      content_tag :path, nil, stroke_linecap: "round", stroke_linejoin: "round", stroke_width: "2", d: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+    end
+  end
+
+  def icon_clock
+    content_tag :svg, xmlns: "http://www.w3.org/2000/svg", class: "h-4 w-4", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor" do
+      content_tag :path, nil, stroke_linecap: "round", stroke_linejoin: "round", stroke_width: "2", d: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+    end
+  end
+
   # Helper para renderizar notificaciones flash
   def render_flash_messages
     return unless flash.any?
